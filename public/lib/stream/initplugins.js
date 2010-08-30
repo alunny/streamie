@@ -39,7 +39,7 @@ require.def("stream/initplugins",
           $("#header").delegate("#mainnav a", "click", function (e) {
             var a = $(this);
             a.blur();
-            var li = a.closest("li");
+            var li = a.find("li");
             
             if(li.hasClass("add")) { // special case for new tweet
               e.preventDefault();
@@ -60,9 +60,6 @@ require.def("stream/initplugins",
             mainstatus.removeClass("active");
           });
           
-          $("#header").delegate("#mainnav li.add", "mouseenter mouseleave", function () {
-            mainstatus.toggleClass("tease");
-          })
         }
       },
       
