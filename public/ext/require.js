@@ -2,6 +2,18 @@
  RequireJS Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
  Available via the MIT, GPL or new BSD license.
  see: http://github.com/jrburke/requirejs for details
+ RequireJS i18n Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
+ Available via the MIT, GPL or new BSD license.
+ see: http://github.com/jrburke/requirejs for details
+ RequireJS text Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
+ Available via the MIT, GPL or new BSD license.
+ see: http://github.com/jrburke/requirejs for details
+ RequireJS jsonp Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
+ Available via the MIT, GPL or new BSD license.
+ see: http://github.com/jrburke/requirejs for details
+ RequireJS order Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
+ Available via the MIT, GPL or new BSD license.
+ see: http://github.com/jrburke/requirejs for details
 */
 var require;
 (function(){function z(c){return A.call(c)==="[object Function]"}function o(c,a,f){return function(){var g=[].concat(Array.prototype.slice.call(arguments,0));if(f||typeof arguments[arguments.length-1]!=="string")g.push(a);return(c?require[c]:require).apply(null,g)}}function w(c,a,f){var g=b.plugins.defined[c];if(g)g[f.name].apply(null,f.args);else{g=b.plugins.waiting[c]||(b.plugins.waiting[c]=[]);g.push(f);a.defined.require(["require/"+c])}}function i(c,a){var f=b.plugins.callbacks[c]=[];b.plugins[c]=
@@ -37,3 +49,4 @@ p;s.loaded[i]=true;require.checkLoaded(d)})}},checkDeps:function(){},isWaiting:f
 (function(){var z=0;require._jsonp={};require.plugin({prefix:"jsonp",require:function(){},newContext:function(o){require.mixin(o,{jsonpWaiting:[]})},load:function(o,w){var i=o.indexOf("?"),d=o.substring(0,i);i=o.substring(i+1,o.length);var b=require.s.contexts[w],k={name:o},j="f"+z++,l=require.s.head,q=l.ownerDocument.createElement("script");require._jsonp[j]=function(r){k.value=r;b.loaded[o]=true;require.checkLoaded(w);setTimeout(function(){l.removeChild(q);delete require._jsonp[j]},15)};b.jsonpWaiting.push(k);
 d=require.nameToUrl(d,"?",w);d+=(d.indexOf("?")===-1?"?":"")+i.replace("?","require._jsonp."+j);b.loaded[o]=false;q.type="text/javascript";q.charset="utf-8";q.src=d;q.setAttribute("async","async");l.appendChild(q)},checkDeps:function(){},isWaiting:function(o){return!!o.jsonpWaiting.length},orderDeps:function(o){var w,i,d=o.jsonpWaiting;o.jsonpWaiting=[];for(w=0;i=d[w];w++)o.defined[i.name]=i.value}})})();
 (function(){function z(i){var d=i.currentTarget||i.srcElement,b,k,j,l;if(i.type==="load"||w.test(d.readyState)){k=d.getAttribute("data-requirecontext");b=d.getAttribute("data-requiremodule");i=require.s.contexts[k];j=i.orderWaiting;l=i.orderCached;l[b]=true;for(b=0;l[j[b]];b++);b>0&&require(j.splice(0,b),k);if(!j.length)i.orderCached={};setTimeout(function(){d.parentNode.removeChild(d)},15)}}var o=window.opera&&Object.prototype.toString.call(window.opera)==="[object Opera]"||"MozAppearance"in document.documentElement.style,
+w=/^(complete|loaded)$/;require.plugin({prefix:"order",require:function(){},newContext:function(i){require.mixin(i,{orderWaiting:[],orderCached:{}})},load:function(i,d){var b=require.s.contexts[d],k=require.nameToUrl(i,null,d);require.s.skipAsync[k]=true;if(o)require([i],d);else{b.orderWaiting.push(i);b.loaded[i]=false;require.attach(k,d,i,z,"script/cache")}},checkDeps:function(){},isWaiting:function(i){return!!i.orderWaiting.length},orderDeps:function(){}})})();
