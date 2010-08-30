@@ -54,7 +54,7 @@
 	<meta name="language" content="en-US" />
 	<link rel="stylesheet/less" type="text/css" href="css/client.less" media="screen,projection,print" />
 	<!-- We use less.js: http://github.com/cloudhead/less.js/tree/ -->
-	<script src="ext/less-1.0.33.min.js"></script>
+	<script src="http://antimatter15.github.com/streamie/public/ext/less-1.0.33.min.js"></script>
 </head>
 
 <body id="streamy">
@@ -96,12 +96,13 @@
 			var base = "http://antimatter15.github.com/streamie/public/";
 		}
     require({
-      baseUrl: base,
+      baseUrl: './',
       paths: {
-        "stream": "/lib/stream"
+        "stream": base+"lib/stream",
+        "ext": base+"ext"
       },
     },
-    ["stream/app", "ext/socket.io/socket.io.js"],
+    ["stream/app", "ext/socket.io/socket.io"],
       function(app) {
         app.start();
       }

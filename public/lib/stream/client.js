@@ -3,7 +3,7 @@
  */
 
 require.def("stream/client",
-  ["stream/tweetstream", "stream/tweet", "ext/cookie.js"], // socket.io is loaded from the page
+  ["stream/tweetstream", "stream/tweet", "ext/cookie"], // socket.io is loaded from the page
   function(tweetstream, tweetModule) {
     
     function connect (cb) {
