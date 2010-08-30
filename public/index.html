@@ -68,14 +68,15 @@
 				<a href="#add" title="New Tweet" target="_self"><li class="add">✍</li></a>
 				<a href="#settings" title="Settings" target="_self"><li class="settings">?</li></a>
 			</ul>
-			<form action="/1/statuses/update.json" method="post" class="status" class="tweet" id="mainstatus">
-		    <input type="hidden" name="in_reply_to_status_id" value="" />
-		    <input type="hidden" name="lat" value="" />
-		    <input type="hidden" name="long" value="" />
-		    <input type="hidden" name="display_coordinates" value="" />
-				<fieldset>
-					<textarea name="status" rows="5" cols="40" placeholder="Your Tweet…"></textarea>
-					<input type="submit" value="Submit" /> <span class="characters">0 characters</span>
+			<form action="/1/statuses/update.json" method="post" class="status tweet" id="mainstatus"> 
+				<input type="hidden" name="in_reply_to_status_id" value="" />
+				<input type="hidden" name="lat" value="" />
+				<input type="hidden" name="long" value="" />
+				<input type="hidden" name="display_coordinates" value="" />
+				<fieldset> 
+					<textarea name="status" rows="5" cols="40" placeholder="Your Tweet…"></textarea> 
+					<span class="characters">0 characters</span> 
+					<input type="submit" value="Tweet this" class="button" />
 				</fieldset>
 			</form>
 		</div>

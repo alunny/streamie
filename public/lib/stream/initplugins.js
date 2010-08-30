@@ -31,8 +31,8 @@ require.def("stream/initplugins",
           
           // close mainstatus when user hits escape
           $(document).bind("key:escape", function () {
-            if(mainstatus.hasClass("active")) {
-              mainstatus.removeClass("active");
+            if(mainstatus.hasClass("show")) {
+              mainstatus.removeClass("show");
             }
           });
           
@@ -43,10 +43,10 @@ require.def("stream/initplugins",
             
             if(li.hasClass("add")) { // special case for new tweet
               e.preventDefault();
-              if(mainstatus.hasClass("active")) {
-                mainstatus.removeClass("active");
+              if(mainstatus.hasClass("show")) {
+                mainstatus.removeClass("show");
               } else {
-                mainstatus.addClass("active");
+                mainstatus.addClass("show");
                 mainstatus.find("[name=status]").focus();
               }
               return;
@@ -57,9 +57,12 @@ require.def("stream/initplugins",
           });
           
           mainstatus.bind("status:send", function () {
-            mainstatus.removeClass("active");
+            mainstatus.removeClass("show");
           });
           
+         //  $("#header").delegate("#mainnav li.add", "mouseenter mouseleave", function () {
+//             mainstatus.toggleClass("tease");
+//           })
         }
       },
       
@@ -134,6 +137,41 @@ require.def("stream/initplugins",
             }
             last = time;
           }, 2000)
+        }
+      },
+      
+      // display state in the favicon
+      favicon: {
+        name: "favicon",
+        colorCanvas: function (color) {
+          // remove the current favicon. Just changung the href doesnt work.
+          var favicon = $("link[rel~=icon]")
+          favicon.remove()
+          
+          // make a quick canvas.
+          var canvas = document.createElement("canvas");
+          canvas.width = 16;
+          canvas.height = 16;
+          var ctx = canvas.getContext("2d");
+          ctx.fillStyle = color;  
+          ctx.fillRect(0, 0, 16, 16);
+          
+          // convert canvas to DataURL
+          var url = canvas.toDataURL();
+
+          // put in a new favicon
+          $("head").append($('<link rel="shortcut icon" type="image/x-icon" href="'+url+'" />'));
+        },
+        
+        func: function (stream, plugin) {
+          
+          $(document).bind("tweet:unread", function (e, count) {
+            var color = "#000000";
+            if(count > 0) {
+              color = "#278BF5";
+            }
+            plugin.colorCanvas(color);
+          })
         }
       },
       
