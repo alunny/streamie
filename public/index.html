@@ -88,8 +88,15 @@
 	<!-- We use require.js for loading dependencies http://requirejs.org/ -->
   <script src="http://antimatter15.github.com/streamie/public/ext/require.js"></script>
   <script>
+		if(location.host.indexOf('streamie.org')<0){
+			//Not streamie.org
+			var base = "./";
+		}else{
+			//streamie.org. oh noes!
+			var base = "http://antimatter15.github.com/streamie/public/";
+		}
     require({
-      baseUrl: "./",
+      baseUrl: base,
       paths: {
         "stream": "/lib/stream"
       },
